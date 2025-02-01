@@ -9,10 +9,18 @@ class TextType(Enum):
     IMAGES = ""
 
 class TextNode():
-    def __init__(self,text,text_type):
+    '''
+    Parses inline markdown text and outputs HTML
+    
+    Members:
+        text (str): content
+        text_type (TextType): normal, bold, italic etc
+        url (str): web page location
+    '''
+    def __init__(self,text,text_type,url = None):
         self.text = text
         self.text_type = text_type
-        self.url = None
+        self.url = url
 
     def __eq__(self, other_text_node):
         if vars(self).items() == vars(other_text_node).items():
@@ -20,10 +28,5 @@ class TextNode():
         else:
             return False
     def __repr__(self):
-        repr = "TextNode(%s,%s,%s)" % (self.text,self.text_type.value,self.url)
+        repr = f"TextNode({self.text}, {self.text_type.value}, {self.url})"
         return repr
-    
-if __name__ == "__main__":
-    print('we jopping')
-    a = TextNode('a',TextType.BOLD)
-    print(a.__repr__())
